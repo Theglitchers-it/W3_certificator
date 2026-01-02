@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Certificator - Notarizza le tue idee</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="5" width="10" height="10" fill="#6366f1" opacity="0.8"/>
+                    <rect x="15" y="5" width="10" height="10" fill="#6366f1" opacity="0.6"/>
+                    <rect x="25" y="5" width="10" height="10" fill="#6366f1" opacity="0.4"/>
+                    <rect x="5" y="15" width="10" height="10" fill="#6366f1" opacity="0.6"/>
+                    <rect x="15" y="15" width="10" height="10" fill="#6366f1"/>
+                    <rect x="25" y="15" width="10" height="10" fill="#6366f1" opacity="0.6"/>
+                    <rect x="5" y="25" width="10" height="10" fill="#6366f1" opacity="0.4"/>
+                    <rect x="15" y="25" width="10" height="10" fill="#6366f1" opacity="0.6"/>
+                    <rect x="25" y="25" width="10" height="10" fill="#6366f1" opacity="0.8"/>
+                </svg>
+                <h1>Blockchain Certificator</h1>
+            </div>
+            <p class="tagline">Proteggi le tue idee con la blockchain</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span class="status-indicator">
+                        <span class="led"></span>
+                        STATUS: CONNECTED TO SEPOLIA
+                    </span>
+                </div>
+
+                <div class="card-header">
+                    <h2>Notarizza il tuo contenuto</h2>
+                    <p>Crea una prova immutabile di esistenza con timestamp verificabile</p>
+                </div>
+
+                <form id="certificationForm">
+                    <div class="form-group">
+                        <label for="title">Titolo</label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Es: La mia idea rivoluzionaria"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Contenuto da notarizzare</label>
+                        <textarea
+                            id="content"
+                            name="content"
+                            rows="8"
+                            placeholder="Inserisci il testo, l'idea o il documento che vuoi proteggere..."
+                            required
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="charCount">0</span> caratteri
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author">Autore (opzionale)</label>
+                        <input
+                            type="text"
+                            id="author"
+                            name="author"
+                            placeholder="Il tuo nome o pseudonimo"
+                        >
+                    </div>
+
+                    <div class="info-box">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="9" stroke="#6366f1" stroke-width="2"/>
+                            <path d="M10 6V10M10 14H10.01" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <div>
+                            <strong>Come funziona?</strong>
+                            <p>Il tuo contenuto verrà hashato e registrato sulla blockchain testnet (nessun costo reale). Riceverai un hash unico e un link alla transazione verificabile.</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="certifyBtn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L12.09 7.26L18 8.27L14 12.14L15.18 18.02L10 15.27L4.82 18.02L6 12.14L2 8.27L7.91 7.26L10 2Z"
+                                  fill="currentColor"/>
+                        </svg>
+                        Certifica sulla Blockchain
+                    </button>
+                </form>
+            </div>
+
+            <div class="card result-card" id="resultCard" style="display: none;">
+                <div class="card-header success">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="28" stroke="#10b981" stroke-width="4" fill="none"/>
+                        <path d="M16 30L26 40L44 20" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <h2>Certificazione Completata!</h2>
+                    <p>Il tuo contenuto è stato notarizzato con successo</p>
+                </div>
+
+                <div class="result-content">
+                    <div class="result-item">
+                        <label>Hash del contenuto:</label>
+                        <div class="hash-display">
+                            <code id="contentHash"></code>
+                            <button class="copy-btn" onclick="copyToClipboard('contentHash')">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="5" y="5" width="9" height="9" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <path d="M3 11V3H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <label>Transaction Hash:</label>
+                        <div class="hash-display">
+                            <code id="txHash"></code>
+                            <button class="copy-btn" onclick="copyToClipboard('txHash')">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="5" y="5" width="9" height="9" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <path d="M3 11V3H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <label>Timestamp:</label>
+                        <div class="timestamp-display">
+                            <span id="timestamp"></span>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <label>Blockchain Explorer:</label>
+                        <a href="#" id="explorerLink" target="_blank" class="explorer-link">
+                            Visualizza su Etherscan
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M12 8.5V12.5C12 13.0523 11.5523 13.5 11 13.5H3.5C2.94772 13.5 2.5 13.0523 2.5 12.5V5C2.5 4.44772 2.94772 4 3.5 4H7.5M10 2.5H13.5M13.5 2.5V6M13.5 2.5L7 9"
+                                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <button class="btn-secondary" onclick="resetForm()">
+                        Certifica un altro contenuto
+                    </button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Immutabile</h3>
+                    <p>Una volta registrato, il tuo contenuto ha una prova permanente sulla blockchain</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>Timestamp</h3>
+                    <p>Dimostra quando hai avuto l'idea con data e ora verificabili</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Decentralizzato</h3>
+                    <p>Nessuna autorità centrale, la blockchain è la tua garanzia</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Ethereum Sepolia Testnet | Built with ❤️ for transparency</p>
+        </footer>
+    </div>
+
+    <div id="walletModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Connetti il tuo Wallet</h3>
+            <p>Per certificare il contenuto sulla blockchain, devi connettere MetaMask</p>
+            <button class="btn-primary" id="connectWalletBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 12C21 16.9706 16.9706 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12H3M12 21C7.02944 21 3 16.9706 3 12M12 21C13.6569 21 15 16.9706 15 12C15 7.02944 13.6569 3 12 3M12 21C10.3431 21 9 16.9706 9 12C9 7.02944 10.3431 3 12 3M3 12C3 7.02944 7.02944 3 12 3"
+                          stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Connetti MetaMask
+            </button>
+            <button class="btn-secondary" onclick="closeModal()">Annulla</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
