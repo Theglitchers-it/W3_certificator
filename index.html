@@ -3,150 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blockchain Certificator - Notarizza le tue idee</title>
+    <title>Certificator | Blockchain Identity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/landing-style.css">
 </head>
 <body>
-    <div class="bg-glow"></div>
-
-    <div class="container">
-        <header>
-            <div class="logo">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="5" y="5" width="10" height="10" fill="#ffffff" opacity="0.8"/>
-                    <rect x="15" y="5" width="10" height="10" fill="#ffffff" opacity="0.6"/>
-                    <rect x="25" y="5" width="10" height="10" fill="#ffffff" opacity="0.4"/>
-                    <rect x="5" y="15" width="10" height="10" fill="#ffffff" opacity="0.6"/>
-                    <rect x="15" y="15" width="10" height="10" fill="#ffffff"/>
-                    <rect x="25" y="15" width="10" height="10" fill="#ffffff" opacity="0.6"/>
-                    <rect x="5" y="25" width="10" height="10" fill="#ffffff" opacity="0.4"/>
-                    <rect x="15" y="25" width="10" height="10" fill="#ffffff" opacity="0.6"/>
-                    <rect x="25" y="25" width="10" height="10" fill="#ffffff" opacity="0.8"/>
-                </svg>
-                <h1>Blockchain Certificator</h1>
-            </div>
-            <p class="tagline">Proteggi le tue idee con la blockchain</p>
-        </header>
-
-        <main>
-            <div class="card">
-                <div class="status-bar">
-                    <span class="status-indicator">
-                        <span class="led"></span>
-                        STATUS: CONNECTED TO SEPOLIA
-                    </span>
-                </div>
-
-                <div class="card-header">
-                    <h2>Notarizza il tuo contenuto</h2>
-                    <p>Crea una prova immutabile di esistenza con timestamp verificabile</p>
-                </div>
-
-                <form id="certificationForm">
-                    <div class="form-group">
-                        <label for="title">Titolo</label>
-                        <input type="text" id="title" name="title" placeholder="Es: La mia idea rivoluzionaria" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="content">Contenuto da notarizzare</label>
-                        <textarea id="content" name="content" rows="8" placeholder="Inserisci il testo, l'idea o il documento che vuoi proteggere..." required></textarea>
-                        <div class="char-counter"><span id="charCount">0</span> caratteri</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="author">Autore (opzionale)</label>
-                        <input type="text" id="author" name="author" placeholder="Il tuo nome o pseudonimo">
-                    </div>
-
-                    <div class="info-box">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <circle cx="10" cy="10" r="9" stroke="white" stroke-width="2" opacity="0.5"/>
-                            <path d="M10 6V10M10 14H10.01" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        <div>
-                            <strong>Come funziona?</strong>
-                            <p>Il tuo contenuto verrà hashato e registrato sulla blockchain testnet (nessun costo reale). Riceverai un hash unico e un link alla transazione verificabile.</p>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-primary" id="certifyBtn">
-                        Certifica sulla Blockchain
-                    </button>
-                </form>
-            </div>
-
-            <div class="card result-card" id="resultCard" style="display: none;">
-                <div class="card-header success">
-                    <svg width="60" height="60" viewBox="0 0 60 60">
-                        <circle cx="30" cy="30" r="28" stroke="#ffffff" stroke-width="4" fill="none"/>
-                        <path d="M16 30L26 40L44 20" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    </svg>
-                    <h2>Certificazione Completata!</h2>
-                    <p>Il tuo contenuto è stato notarizzato con successo</p>
-                </div>
-
-                <div class="result-content">
-                    <div class="result-item">
-                        <label>Hash del contenuto:</label>
-                        <div class="hash-display">
-                            <code id="contentHash"></code>
-                        </div>
-                    </div>
-                    <div class="result-item">
-                        <label>Transaction Hash:</label>
-                        <div class="hash-display">
-                            <code id="txHash"></code>
-                        </div>
-                    </div>
-                    <div class="result-item">
-                        <label>Timestamp:</label>
-                        <div class="timestamp-display"><span id="timestamp"></span></div>
-                    </div>
-                    <div class="result-item">
-                        <label>Blockchain Explorer:</label>
-                        <a href="#" id="explorerLink" target="_blank" class="explorer-link">Visualizza su Etherscan</a>
-                    </div>
-                    <button class="btn-secondary" onclick="resetForm()">Certifica un altro contenuto</button>
-                </div>
-            </div>
-
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Immutabile</h3>
-                    <p>Una volta registrato, il tuo contenuto ha una prova permanente sulla blockchain</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⏰</div>
-                    <h3>Timestamp</h3>
-                    <p>Dimostra quando hai avuto l'idea con data e ora verificabili</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Decentralizzato</h3>
-                    <p>Nessuna autorità centrale, la blockchain è la tua garanzia</p>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            <p>Powered by Ethereum Sepolia Testnet | Built with ❤️ for transparency</p>
-        </footer>
+    <div class="background-wrapper">
+        <div class="glow-sphere sphere-1"></div>
+        <div class="glow-sphere sphere-2"></div>
+        <div class="glow-sphere sphere-3"></div>
     </div>
 
-    <div id="walletModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h3>Connetti il tuo Wallet</h3>
-            <p>Per certificare il contenuto sulla blockchain, devi connettere MetaMask</p>
-            <button class="btn-primary" id="connectWalletBtn">Connetti MetaMask</button>
-            <button class="btn-secondary-link" onclick="closeModal()">Annulla</button>
+    <nav class="navbar">
+        <div class="logo">W3-Certificator<span>.</span></div>
+        <div class="nav-links">
+            <a href="index.html" class="btn-nav">Launch App</a>
         </div>
-    </div>
+    </nav>
 
-    <script src="js/app.js"></script>
+    <section class="hero">
+        <div class="container">
+            <div class="badge-wrapper">
+                <span class="badge-glow"></span>
+                <div class="badge-content">Web3 Notarization Engine</div>
+            </div>
+            
+            <h1>Le tue idee. <br><span class="gradient-text">Immutabili sulla Blockchain.</span></h1>
+            
+            <p class="hero-text">
+                Certifica la tua creatività con la potenza della crittografia. 
+                Semplice, veloce e tecnologicamente inattaccabile.
+            </p>
+            
+            <div class="cta-group">
+                <a href="index.html" class="btn-main">Get Started Now</a>
+                <div class="secondary-info">✓ No Gas Fees (Sepolia)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-grid">
+        <div class="container">
+            <div class="f-card">
+                <div class="icon-box">🛡️</div>
+                <h3>Immutabilità</h3>
+                <p>Nessun governo o azienda può alterare la data di creazione della tua idea.</p>
+            </div>
+            <div class="f-card">
+                <div class="icon-box">⚡</div>
+                <h3>Velocità Flash</h3>
+                <p>Generazione dell'hash locale e notarizzazione istantanea sulla rete Sepolia.</p>
+            </div>
+            <div class="f-card">
+                <div class="icon-box">🔗</div>
+                <h3>Interoperabile</h3>
+                <p>Compatibile con tutti i principali wallet ERC-20 per una gestione sicura.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Blockchain Certificator. Designed for visionaries.</p>
+    </footer>
 </body>
 </html>
