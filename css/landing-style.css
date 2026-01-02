@@ -129,3 +129,54 @@ body {
 .f-card p { color: var(--accent); font-size: 0.95rem; }
 
 footer { text-align: center; padding: 60px; color: #333; font-size: 0.75rem; }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px 5%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-nav {
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .hero {
+        padding: 60px 5%;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .hero-text {
+        font-size: 1rem;
+    }
+
+    .btn-main {
+        padding: 16px 35px;
+        font-size: 1rem;
+    }
+
+    .features-grid .container {
+        grid-template-columns: 1fr;
+        padding: 60px 5%;
+    }
+
+    .f-card {
+        padding: 30px;
+    }
+}
